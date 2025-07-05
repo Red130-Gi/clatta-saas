@@ -42,11 +42,14 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: ./backend
 
       - name: Build project
         run: npm run build --if-present
+        working-directory: ./backend
 
       - name: Run migrations & tests
         run: |
           npx typeorm-ts-node-commonjs -d src/data-source.ts migration:run
           npm run test:e2e -- --runInBand
+        working-directory: ./backend
